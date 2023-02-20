@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.22)
 
-project(Progonka)
+project(SLAE)
 
 set(CMAKE_CXX_STANDART 22)
 
