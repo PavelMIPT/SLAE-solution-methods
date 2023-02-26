@@ -62,26 +62,6 @@ std::vector<double> Dense_Matrix :: Get_column (size_t i){
 }
 
 
-//оператор вывода для std::vector<double>
-std::ostream& operator<<(std::ostream &os, const std::vector<double>  & v){
-    for(auto i : v){
-        os << i << " ";
-    }
-    return os;
-}
-
-//оператор вывода для std::vector<std::vector<double>>
-std::ostream& operator<<(std::ostream &os, const std::vector<std::vector<double>>  & v){
-    for(size_t i = 0; i < v.size(); ++i){
-        for(size_t j = 0; j < v[i].size(); ++j){
-            os << v[i][j] << " ";
-        }
-        
-        
-    }
-    return os;
-}
-
 // умножаем на матрицу a
 Dense_Matrix Dense_Matrix :: operator * (const Dense_Matrix & a){
     std::vector <double> res(a.A.size());
