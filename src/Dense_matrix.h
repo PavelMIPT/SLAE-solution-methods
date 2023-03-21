@@ -1,4 +1,5 @@
 #include <vector>
+#include <ostream>
 #include <iostream>
 #pragma once
 
@@ -25,13 +26,21 @@ class Dense_Matrix{
         Dense_Matrix operator * (const Dense_Matrix & a) const;
 
         //оператор вычитания матрицы(n, n) из матрицы (n. n) 
-        Dense_Matrix operator - (const Dense_Matrix & a) const;
+        Dense_Matrix operator + (const Dense_Matrix & a) const;
 
         //оператор умножения матрицы(n. n) на число
         Dense_Matrix operator * (double k) const;
 
         // доступ к элементу
         double get_element (size_t i, size_t j) const;
+
+        double get_size() const;
+
+        double get_n () const;
+
+        double get_m () const;
+
+        std::vector<double> get_A() const;
 
 };
 std::vector<double> Dense_Matrix :: Multiplicate_column(const std::vector<double> & a) const
@@ -86,13 +95,13 @@ Dense_Matrix Dense_Matrix :: operator * (const Dense_Matrix & a) const
 
 }
 
-//вычитаем матрицу a из исходной матрицы такого же размера
-Dense_Matrix Dense_Matrix :: operator - (const Dense_Matrix & a) const
+
+Dense_Matrix Dense_Matrix :: operator + (const Dense_Matrix & a) const
 {
     std::vector <double> res(a.A.size());
     for (size_t i = 0; i < a.n; ++i){
         for (size_t j = 0; j < a.n; ++j){
-            res[a.n * i + j] = this->A[a.n * i + j] - a.A[a.n * i + j];
+            res[a.n * i + j] = this->A[a.n * i + j] + a.A[a.n * i + j];
         }
     }
     Dense_Matrix Res (res, a.n, a.n);
@@ -105,9 +114,43 @@ Dense_Matrix Dense_Matrix :: operator * (double k) const
     for (size_t i = 0; i < this->A.size(); ++i){
         res[i] = this->A[i] * k;
     }
+    Dense_Matrix m (res, this->get_n(), this->get_m());
+    return m;
 }
 
 double Dense_Matrix :: get_element(size_t i, size_t j) const
 {
     return this->A[this->m * i + j];
+}
+
+double Dense_Matrix :: get_size() const
+{
+    return this->A.size();
+}
+
+double Dense_Matrix :: get_n() const
+{
+    return this->n;
+}
+
+double Dense_Matrix :: get_m() const
+{
+    return this->m;
+}
+
+std::vector<double> Dense_Matrix :: get_A() const
+{
+    return this->A;
+}
+
+std::ostream& operator<< (std::ostream &os, const Dense_Matrix & A)
+{
+    for (size_t i = 0; i < A.get_n(); ++i){
+        for (size_t j = 0; j < A.get_m(); ++j){
+            os << A.get_element(i, j) << " ";
+        }
+        os << std::endl;
+    }
+
+    return os;
 }
