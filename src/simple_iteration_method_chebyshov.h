@@ -14,8 +14,8 @@ std::vector<double> chebyshov_Simple_iteration_method(Dense_Matrix & A, const st
     {
         
         x0 = x1;
-        std::cout << log(Norma(A.Multiplicate_column(x0) - b));
-        std::cout << " ";
+        //std::cout << log(Norma(A.Multiplicate_column(x0) - b)); для 2 кр
+        //std::cout << " ";
         x1 = x1 - A.Multiplicate_column(x1) * tau + b * tau;
         tau = 2 / ((lmin + lmax) + (lmax - lmin) * cos(M_PI * (2 * k - 1) / 2 * 8));
         //std::cout << Norma(x1 - x0);
