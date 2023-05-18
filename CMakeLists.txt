@@ -1,9 +1,19 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.0.0)
+project(slae)
+#[[//add_compile_definitions(-Wall -Werror)]]
+set(CMAKE_CXX_STANDART 20)
 
-project(SLAE)
+add_subdirectory(src)
+add_subdirectory(gtest)
 
-set(CMAKE_CXX_STANDART 22)
+if (WITH_TESTS)
+    add_compile_definitions(COMPILE_WITH_TESTS)
+    enable_testing()
+    add_subdirectory(tests)
+    message("TESTING: ON")
+else ()
+    message("TESTING: OFF")
+endif ()
 
-file(GLOB_RECURSE SOURCES *.h *.cpp)
-
-add_library(Matrix INTERFACE  ${SOURCES})
+#[[
+//target_link_libraries(cmake_demo fmt::fmt)]]
