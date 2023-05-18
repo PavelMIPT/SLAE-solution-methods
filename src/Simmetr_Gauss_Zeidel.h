@@ -36,8 +36,8 @@ std::vector<double> Simm_Gauss_Zeidel(const Dense_Matrix & A, const std::vector<
             X[i - 1] = X_tmp2;
             
         }
-        std::cout << log(Norma(A.Multiplicate_column(X) - b));
-        std::cout << " ";
+        //std::cout << log(Norma(A.Multiplicate_column(X) - b)); для 2 кр
+        //std::cout << " ";
     }
     return X;
 
